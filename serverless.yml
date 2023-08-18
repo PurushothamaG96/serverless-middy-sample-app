@@ -1,0 +1,31 @@
+service: sample-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+# custom:
+#   dotenv:
+#     path: ./env
+
+# environment:
+#     MONGODB_URL: ${env:MONGODB_URL}
+
+functions:
+  function1:
+    handler: src/functions/login.handler
+    events:
+      - http:
+          path: /login
+          method: POST
+  function2:
+    handler: src/functions/signin.handler
+    events:
+      - http:
+          path: /signin
+          method: POST
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
